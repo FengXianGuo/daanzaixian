@@ -34,16 +34,25 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.post('/',function(req,res){
-
+	console.log(req.body);
 	var obj = {
-		"result": true,
+	    "result": true,
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
-	    "type": "text",
+	    "tpye": "text",
 	    "data":encodeURI(JSON.stringify({
 	    	"text":req.body.text
-	    })),
+	    }))
 	}
+	// var obj = {
+	// 	"result": true,
+	//     "receiver_id":req.body.receiver_id,
+	//     "sender_id":req.body.sender_id,
+	//     "type": "text",
+	//     "data":encodeURI(JSON.stringify({
+	//     	"text":req.body.text
+	//     })),
+	// }
 	// obj.data = encodeURI(JSON.stringify({
 	// 	"text": "纯文本响应"
 	// }));
