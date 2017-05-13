@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 })
 app.post('/',function(req,res){
 	console.log(req.body);
-	res.json({
+	res.json(JSON.stringify({
 		"result": true,
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
@@ -43,7 +43,7 @@ app.post('/',function(req,res){
 	    "data":{
 	    	"text":req.body.text,
 	    }
-	});
+	}));
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
 	//res.redirect("back")//*****从哪来回哪去。
