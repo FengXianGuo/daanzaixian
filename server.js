@@ -37,8 +37,8 @@ app.post('/',function(req,res){
 	console.log(req.body);
 	var obj = {
 	    "result": true,
-	    "receiver_id":""+req.body.receiver_id,
-	    "sender_id":""+req.body.sender_id,
+	    "receiver_id":req.body.receiver_id,
+	    "sender_id":req.body.sender_id,
 	    "tpye": "text",
 	    "data":encodeURI(JSON.stringify({
 	    	"text":req.body.text
@@ -59,8 +59,7 @@ app.post('/',function(req,res){
 	console.log(obj);
 
 
-	res.writeHead(200, {'Content-Type': 'application/json'});
-  	res.end(JSON.stringify(obj));
+	res.json(obj);
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
 	//res.redirect("back")//*****从哪来回哪去。
