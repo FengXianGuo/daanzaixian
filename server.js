@@ -35,6 +35,7 @@ app.get('/', function (req, res) {
 })
 app.post('/',function(req,res){
 	console.log(req.body);
+	res.send(body.text);
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
 	//res.redirect("back")//*****从哪来回哪去。
