@@ -40,8 +40,9 @@ app.post('/',function(req,res){
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
 	    "type": "text",
-	    "text" : req.body.text,
-	    "data":"{}"
+	    "data":{
+	    	"text":req.body.text,
+	    }
 	});
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
