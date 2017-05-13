@@ -34,6 +34,7 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.post('/',function(req,res){
+
 	var obj = {
 		"result": true,
 	    "receiver_id":req.body.receiver_id,
@@ -41,7 +42,10 @@ app.post('/',function(req,res){
 	    "type": "text",
 	    "data":'',
 	}
-	obj.data = encodeURI("{test:"+req.body.text+"}");
+	obj.data = encodeURI(JSON.stringify({
+		"text": "纯文本响应"
+	}));
+	console.log(obj);
 
 
 	res.json(obj);
