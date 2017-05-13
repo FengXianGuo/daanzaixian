@@ -40,15 +40,17 @@ app.post('/',function(req,res){
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
 	    "type": "text",
-	    "data":"%7B%22text%22%3A%22%E4%B8%AD%E6%96%87%E6%B6%88%E6%81%AF%22%7D",
+	    "data":encodeURI(JSON.stringify({
+	    	"text":req.body.text
+	    })),
 	}
 	// obj.data = encodeURI({
 	// 	"text": "纯文本响应"
 	// });
-	console.log(obj);
+	// console.log(obj);
 
 
-	res.send(obj);
+	res.json(obj);
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
 	//res.redirect("back")//*****从哪来回哪去。
