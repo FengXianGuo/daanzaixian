@@ -35,7 +35,7 @@ app.get('/', function (req, res) {
 })
 app.post('/',function(req,res){
 	console.log(req.body);
-	res.send({
+	res.json({
 		"result": true,
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
