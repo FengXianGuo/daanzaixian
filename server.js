@@ -44,10 +44,10 @@ app.post('/',function(req,res){
 	    	"text":req.body.text
 	    })),
 	}
-	// obj.data = encodeURI({
+	// obj.data = encodeURI(JSON.stringify({
 	// 	"text": "纯文本响应"
-	// });
-	// console.log(obj);
+	// }));
+	console.log(obj);
 
 
 	res.json(obj);
