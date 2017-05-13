@@ -34,8 +34,11 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.post('/',function(req,res){
+	// console.log(req.body);
+	console.log("----------");
 	console.log(req.body);
-	res.json({
+	console.log("---------");
+	var obj = {
 		"result": true,
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
@@ -43,7 +46,12 @@ app.post('/',function(req,res){
 	    "data":{
 	    	"text":req.body.text,
 	    }
-	});
+	}
+	console.log("1");
+	console.log(obj);
+	console.log(2);
+
+	res.json(obj);
 	// res.send(req.body);
 	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
 	//res.redirect("back")//*****从哪来回哪去。
