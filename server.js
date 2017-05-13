@@ -40,11 +40,11 @@ app.post('/',function(req,res){
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
 	    "type": "text",
-	    "data":'',
+	    "data":"%7B%22text%22%3A%22%E4%B8%AD%E6%96%87%E6%B6%88%E6%81%AF%22%7D",
 	}
-	obj.data = encodeURI(JSON.stringify({
-		"text": "纯文本响应"
-	}));
+	// obj.data = encodeURI({
+	// 	"text": "纯文本响应"
+	// });
 	console.log(obj);
 
 
