@@ -34,22 +34,15 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.post('/',function(req,res){
-	// console.log(req.body);
-	console.log("----------");
-	console.log(req.body);
-	console.log("---------");
 	var obj = {
 		"result": true,
 	    "receiver_id":req.body.receiver_id,
 	    "sender_id":req.body.sender_id,
 	    "type": "text",
-	    "data":{
-	    	"text":req.body.text,
-	    }
+	    "data":'',
 	}
-	console.log("1");
-	console.log(obj);
-	console.log(2);
+	obj.data = encodeURI("{test:"+req.body.text+"}");
+
 
 	res.json(obj);
 	// res.send(req.body);
