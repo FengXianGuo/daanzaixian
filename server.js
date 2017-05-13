@@ -37,8 +37,8 @@ app.post('/',function(req,res){
 	console.log(req.body);
 	var obj = {
 	    "result": true,
-	    "receiver_id":req.body.receiver_id,
-	    "sender_id":req.body.sender_id,
+	    "receiver_id":""+req.body.receiver_id,
+	    "sender_id":""+req.body.sender_id,
 	    "tpye": "text",
 	    "data":encodeURI(JSON.stringify({
 	    	"text":req.body.text
