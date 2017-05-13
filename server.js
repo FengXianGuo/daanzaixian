@@ -50,3 +50,6 @@ app.post('/',function(req,res){
 })
 
 app.listen(process.env.PORT || 5050)
+app.on("error",function(e){
+	console.log(e);
+})
