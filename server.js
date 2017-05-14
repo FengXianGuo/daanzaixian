@@ -46,7 +46,7 @@ app.post('/',function(req,res){
 	}
 	console.log(obj);
 	// 技能树3.png
-	res.setHeader('Content-type: text/html; charset=utf-8' );
+	res.set('Content-Type','text/plain; charset=utf-8');
 
 	res.json(obj);
 })
