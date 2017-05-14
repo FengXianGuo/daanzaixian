@@ -44,25 +44,11 @@ app.post('/',function(req,res){
 	    	"text":req.body.text
 	    }))
 	}
-	// var obj = {
-	// 	"result": true,
-	//     "receiver_id":req.body.receiver_id,
-	//     "sender_id":req.body.sender_id,
-	//     "type": "text",
-	//     "data":encodeURI(JSON.stringify({
-	//     	"text":req.body.text
-	//     })),
-	// }
-	// obj.data = encodeURI(JSON.stringify({
-	// 	"text": "纯文本响应"
-	// }));
 	console.log(obj);
-
+	// 技能树3.png
+	res.setHeader('Content-type: text/html; charset=utf-8' );
 
 	res.json(obj);
-	// res.send(req.body);
-	// res.redirect("/users")//重定向告诉客户端向另外一个地址发请求；
-	//res.redirect("back")//*****从哪来回哪去。
 })
 
 app.listen(process.env.PORT || 5050)
