@@ -35,24 +35,41 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.get('/wechat',function(req,res){
+	// var signature = req.query.signature;
+	// var timestamp = req.query.timestamp;
+	// var echostr   = req.query.echostr;
+	// var nonce     = req.query.nonce;
+	// var oriArray = new Array();
+	// oriArray[0] = nonce;
+	// oriArray[1] = timestamp;
+	// oriArray[2] = token;
+	// var result = oriArray.sort().join();
+	// var sha = sha1(result);
+	// console.log("sha="+sha);
+	// console.log("signture="+signature);
+	//  if(sha == signature){
+	//  	res.send(echostr + '');
+	//  //验证成功
+	//  } else {
+	//  //验证失败
+	//  	res.send('err');
+	//  }
 	var token="weixin";
-	var signature = req.query.signature;
-	var timestamp = req.query.timestamp;
-	var echostr   = req.query.echostr;
-	var nonce     = req.query.nonce;
-	var oriArray = new Array();
-	oriArray[0] = nonce;
-	oriArray[1] = timestamp;
-	oriArray[2] = token;
-	var result = oriArray.sort().join();
-	var sha = sha1(result);
-	 if(sha == signature){
-	 	res.send(echostr + '');
-	 //验证成功
-	 } else {
-	 //验证失败
-	 	res.send('err');
-	 }
+    var signature = req.query.signature;
+    var nonce = req.query.nonce;
+    var timestamp = req.query.timestamp;
+    var echostr = req.query.echostr;
+    var str = [token, timestamp, nonce].sort().join('');
+    var sha = sha1(str);
+    console.log("sha="+sha);
+	console.log("signture="+signature);
+    //将你自己生成的signature和服务器传过来的signature来进行比较，如果成功则验证通过。
+    if (sha === signature) {
+        res.send(echostr + '');
+    }
+    else {
+        res.send('wrong');
+    }
 })
 app.post('/',function(req,res){
 	// console.log(req.body);
