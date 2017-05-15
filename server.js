@@ -45,18 +45,22 @@ app.get('/', function (req, res) {
 })
 app.post('/',function(req,res){
 	// console.log(req.body);
+	// var obj = {
+	//     "result": true,
+	//     "receiver_id":req.body.receiver_id,
+	//     "sender_id":req.body.sender_id,
+	//     "tpye": "text",
+	//     "data":encodeURI(JSON.stringify({
+	//     	"text":req.body.text
+	//     }))
+	// }
 	var obj = {
-	    "result": true,
-	    "receiver_id":req.body.receiver_id,
-	    "sender_id":req.body.sender_id,
-	    "tpye": "text",
-	    "data":encodeURI(JSON.stringify({
-	    	"text":req.body.text
-	    }))
-	}
-	// console.log(obj);
-	// 技能树3.png
-	res.set('Content-Type','text/plain; charset=utf-8');
+	    "result":true,
+	    "sender_id":req.body.receiver_id,
+	    "receiver_id":req.body.sender_id,
+	    "type":"text",
+	    "data":"%7B%22text%22%3A%22%E4%B8%AD%E6%96%87%E6%B6%88%E6%81%AF%22%7D"
+	};
 
 	res.json(obj);
 })
