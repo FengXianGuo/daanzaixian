@@ -59,7 +59,9 @@ app.post('/',function(req,res){
 	    "sender_id":req.body.receiver_id,
 	    "receiver_id":req.body.sender_id,
 	    "type":"text",
-	    "data":"%7B%22text%22%3A%22%E4%B8%AD%E6%96%87%E6%B6%88%E6%81%AF%22%7D"
+	    "data":encodeURI(JSON.stringify({
+	    	"text":req.body.text
+	    }))
 	};
 
 	res.json(obj);
