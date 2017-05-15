@@ -8,6 +8,7 @@ app.use(bodyParser.json())
 
 
 app.get('/', function (req, res) {
+	console.log(req.query)
 	var q = req.query; 
 	var signature = q.signature;
 	var timestamp = q.timestamp;
@@ -34,7 +35,7 @@ app.get('/', function (req, res) {
   // res.send('Hello World')
 })
 app.post('/',function(req,res){
-	console.log(req.body);
+	// console.log(req.body);
 	var obj = {
 	    "result": true,
 	    "receiver_id":req.body.receiver_id,
@@ -44,7 +45,7 @@ app.post('/',function(req,res){
 	    	"text":req.body.text
 	    }))
 	}
-	console.log(obj);
+	// console.log(obj);
 	// 技能树3.png
 	res.set('Content-Type','text/plain; charset=utf-8');
 
