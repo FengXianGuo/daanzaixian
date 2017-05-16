@@ -1,14 +1,36 @@
+//创建express应用
 var express = require('express');
 var sha1 = require("sha1");
 var bodyParser = require('body-parser')
+var path = require('path');
+
+
+//分离初始化模块
 var weibo = require('./init').weibo;
 var wechat = require('./init').wechat;
-var app = express();
-app.use(bodyParser.json())
 
+var app = express();
+
+app.use(express.static('static'));
+app.use(bodyParser.json())
+//注册引擎
+app.set('view engine','html');
+app.set('views',path.resolve('views'));
+app.engine('html',require('ejs').__express);
+
+
+//处理验签
 app.get('/weibo', weibo);
 app.get('/wechat',wechat);
 
+//
+app.get('/index',function(req,res){
+    res.render('index');
+})
+app.get('/api/answer',function(req,res){
+    res.send("123");
+})
+//微博自动回复
 app.post('/weibo',function(req,res){
     var obj = {
         "result":true,
@@ -22,6 +44,7 @@ app.post('/weibo',function(req,res){
 
     res.json(obj);
 })
+//微信自动回复
 app.post('/wechat',function(req,res){
     var _da;
     req.on("data",function(data){
