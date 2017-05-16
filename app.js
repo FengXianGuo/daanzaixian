@@ -1,8 +1,12 @@
 const Koa = require('koa')
 const app = new Koa()
+const bodyParser = require('koa-bodyparser');
+app.use(bodyParser());
 const Router = require('koa-router')
+
 const init = require("./routes/init.js");
 const answer = require("./routes/answer.js"); 
+
 
 
 // 加载路由中间件
