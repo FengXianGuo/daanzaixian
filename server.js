@@ -4,17 +4,6 @@ var bodyParser = require('body-parser')
 
 var app = express();
 app.use(bodyParser.json())
-// app.use(bodyParser.xml({
-//   limit: '1MB',   // Reject payload bigger than 1 MB
-//   xmlParseOptions: {
-//     normalize: true,     // Trim whitespace inside text nodes
-//     normalizeTags: true, // Transform tags to lowercase
-//     explicitArray: false // Only put nodes in array if >1
-//   }
-// }));
-
-
-
 
 app.get('/', function (req, res) {
 	console.log(req.query)
@@ -35,25 +24,8 @@ app.get('/', function (req, res) {
             res.send('err');  
         }  
     }  
-    // else if(req.method == 'POST'){  
-    //     if (sha != signature) {  
-    //         return;  
-    //     }  
-    //     next();  
-    // }  
-  // res.send('Hello World')
 })
 app.post('/',function(req,res){
-	// console.log(req.body);
-	// var obj = {
-	//     "result": true,
-	//     "receiver_id":req.body.receiver_id,
-	//     "sender_id":req.body.sender_id,
-	//     "tpye": "text",
-	//     "data":encodeURI(JSON.stringify({
-	//     	"text":req.body.text
-	//     }))
-	// }
 	var obj = {
 	    "result":true,
 	    "sender_id":req.body.receiver_id,

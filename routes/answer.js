@@ -39,4 +39,4 @@ router.post('/weibo', async (ctx,next)=>{
         }  
     }
 }); // responds to "/users/:id"
-module.exports = init;
+module.exports = router;
