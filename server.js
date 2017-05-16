@@ -16,7 +16,7 @@ app.use(bodyParser.json())
 
 
 
-app.get('/', function (req, res) {
+app.get('/weibo', function (req, res) {
 	console.log(req.query)
 	var q = req.query; 
 	var signature = q.signature;
@@ -35,25 +35,8 @@ app.get('/', function (req, res) {
             res.send('err');  
         }  
     }  
-    // else if(req.method == 'POST'){  
-    //     if (sha != signature) {  
-    //         return;  
-    //     }  
-    //     next();  
-    // }  
-  // res.send('Hello World')
 })
-app.post('/',function(req,res){
-	// console.log(req.body);
-	// var obj = {
-	//     "result": true,
-	//     "receiver_id":req.body.receiver_id,
-	//     "sender_id":req.body.sender_id,
-	//     "tpye": "text",
-	//     "data":encodeURI(JSON.stringify({
-	//     	"text":req.body.text
-	//     }))
-	// }
+app.post('/weibo',function(req,res){
 	var obj = {
 	    "result":true,
 	    "sender_id":req.body.receiver_id,
@@ -94,19 +77,12 @@ app.post('/wechat',function(req,res){
 
     });
     req.on("end",function(){
-        //console.log("end");
         var ToUserName = getXMLNodeValue('ToUserName',_da);
         var FromUserName = getXMLNodeValue('FromUserName',_da);
         var CreateTime = getXMLNodeValue('CreateTime',_da);
         var MsgType = getXMLNodeValue('MsgType',_da);
         var Content = getXMLNodeValue('Content',_da);
         var MsgId = getXMLNodeValue('MsgId',_da);
-        console.log(ToUserName);
-        console.log(FromUserName);
-        console.log(CreateTime);
-        console.log(MsgType);
-        console.log(Content);
-        console.log(MsgId);
         var xml = '<xml><ToUserName>'+FromUserName+'</ToUserName><FromUserName>'+ToUserName+'</FromUserName><CreateTime>'+CreateTime+'</CreateTime><MsgType>'+MsgType+'</MsgType><Content>'+Content+'</Content></xml>';
         res.send(xml);
     });
