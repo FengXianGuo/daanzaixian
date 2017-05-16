@@ -1,16 +1,23 @@
 var sha1 = require('sha1');
 module.exports.weibo = function(req,res){
-	var obj = {
-	    "result":true,
-	    "sender_id":req.body.receiver_id,
-	    "receiver_id":req.body.sender_id,
-	    "type":"text",
-	    "data":encodeURI(JSON.stringify({
-	    	"text":req.body.text
-	    }))
-	};
+	console.log(req.query)
+    var q = req.query; 
+    var signature = q.signature;
+    var timestamp = q.timestamp;
+    var echostr = q.echostr;
+    var nonce = q.nonce;
+    var appsecret = '3b1f610929071dbababe53a46a2c4cf0';
+    var str = [appsecret, timestamp, nonce].sort().join('');  
+    var sha = sha1(str); 
+    // console.log(sha); 
+    if (req.method == 'GET') {  
 
-	res.json(obj);
+        if (sha == signature) {  
+            res.send(echostr+'')  
+        }else{  
+            res.send('err');  
+        }  
+    } 
 };
 module.exports.wechat = function(req,res){
 	var token="weixin";
