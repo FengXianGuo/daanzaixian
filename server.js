@@ -5,7 +5,7 @@ var bodyParser = require('body-parser')
 var app = express();
 app.use(bodyParser.json())
 
-app.get('/', function (req, res) {
+app.get('/weibo', function (req, res) {
 	console.log(req.query)
 	var q = req.query; 
 	var signature = q.signature;
@@ -25,7 +25,7 @@ app.get('/', function (req, res) {
         }  
     }  
 })
-app.post('/',function(req,res){
+app.post('/weibo',function(req,res){
 	var obj = {
 	    "result":true,
 	    "sender_id":req.body.receiver_id,
