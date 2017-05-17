@@ -119,14 +119,14 @@ app.on("error",function(e){
 })
 function getRandomContent(){
     var a = require(datapath);
-    var b = [];
-    while (a.length > 0) {
-        var index = parseInt(Math.random() * (a.length - 1));
-        b.push(a[index]);
-        a.splice(index, 1);
-    }
-    a = b;
-    var len = a.length;
+    // var b = [];
+    // while (a.length > 0) {
+    //     var index = parseInt(Math.random() * (a.length - 1));
+    //     b.push(a[index]);
+    //     a.splice(index, 1);
+    // }
+    // a = b;
+    // var len = a.length;
     // console.log(answers.length);
 
     var content = a[parseInt(Math.random()*len)];
