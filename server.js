@@ -68,6 +68,7 @@ app.get('/api/answer',function(req,res){
 // })
 //微博自动回复
 app.post('/weibo',function(req,res){
+
     var obj = {
         "result":true,
         "sender_id":req.body.receiver_id,
@@ -77,6 +78,7 @@ app.post('/weibo',function(req,res){
             "text":getRandomContent()
         }))
     };
+    console.log(obj);
 
     res.json(obj);
 })
@@ -94,8 +96,7 @@ app.post('/wechat',function(req,res){
         var FromUserName = getXMLNodeValue('FromUserName',_da);
         var CreateTime = getXMLNodeValue('CreateTime',_da);
         var MsgType = getXMLNodeValue('MsgType',_da);
-        // var Content = getXMLNodeValue('Content',_da);
-        var Content = getRandomContent();
+        var Content = getXMLNodeValue('Content',_da);
         var MsgId = getXMLNodeValue('MsgId',_da); 
         var xml = '<xml><ToUserName>'+FromUserName+'</ToUserName><FromUserName>'+ToUserName+'</FromUserName><CreateTime>'+CreateTime+'</CreateTime><MsgType>'+MsgType+'</MsgType><Content>'+Content+'</Content></xml>';
         res.send(xml);
