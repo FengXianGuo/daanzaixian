@@ -126,7 +126,7 @@ function getRandomContent(){
     //     a.splice(index, 1);
     // }
     // a = b;
-    // var len = a.length;
+    var len = a.length;
     // console.log(answers.length);
 
     var content = a[parseInt(Math.random()*len)];
