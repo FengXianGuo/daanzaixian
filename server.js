@@ -96,6 +96,7 @@ app.post('/wechat',function(req,res){
         var FromUserName = getXMLNodeValue('FromUserName',_da);
         var CreateTime = getXMLNodeValue('CreateTime',_da);
         var MsgType = getXMLNodeValue('MsgType',_da);
+        console.log(MsgType);
         // var Content = getXMLNodeValue('Content',_da);
         var Content = getRandomContent();
 
