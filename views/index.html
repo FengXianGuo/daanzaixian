@@ -28,27 +28,35 @@
 		  timer:null,
 		  methods: {
 		    reverseMessage: function () {
-		    	clearInterval(this.timer);
-		    	this.$http.get('/api/answer?message='+this.message).then(response => {
+		    	this.$http.get('/api/answer').then(response => {
 
 				    // get body data
 				    this.message = "";
 
-				  }, response => {
+					}, response => {
 				    // error callback
-				  });
-		    	// setInterval(function(){
-		    		this.$http.get('/api/show').then(response => {
-		    			console.log(response);
-				    // get body data
-				    this.items = response.body;
+				});
+		    // 	clearInterval(this.timer);
+		    // 	this.$http.get('/api/answer?message='+this.message).then(response => {
 
-				  }, response => {
-				    // error callback
-				  });
-		    	// }, 1000);
+				  //   // get body data
+				  //   this.message = "";
+
+				  // }, response => {
+				  //   // error callback
+				  // });
+		    // 	// setInterval(function(){
+		    // 		this.$http.get('/api/show').then(response => {
+		    // 			console.log(response);
+				  //   // get body data
+				  //   this.items = response.body;
+
+				  // }, response => {
+				  //   // error callback
+				  // });
+		    // 	// }, 1000);
 		    	
-		      //this.message = this.message.split('').reverse().join('')
+		    //   //this.message = this.message.split('').reverse().join('')
 		    },
 		    submit:function(){
 		    	this.reverseMessage();

@@ -30,37 +30,42 @@ app.get('/index',function(req,res){
     res.render('index');
 })
 //处理接口
+
 app.get('/api/answer',function(req,res){
-    // app.post('/users',function(req,res){
-    //接收请求体保存到文件
-    // var user = req.body;
-    var answer = req.query.message;
-    var answers = require(datapath);
-    // user.id = Number(users[users.length-1].id) + 1;
-    answers.push({
-        answer:answer
-    });
-    //保存文件/写文件   异步的方法writeFile
-    fs.writeFile(datapath,JSON.stringify(answers),function(err){
-        res.send('写入完成');
-    });
+    var content = getRandomContent();
+    res.send(content);
 })
-app.get('/api/show',function(req,res){
-    // app.post('/users',function(req,res){
-    //接收请求体保存到文件
-    // var user = req.body;
-    // var answer = req.query.message;
-    var answers = require(datapath);
-    answers.reverse();
-    // user.id = Number(users[users.length-1].id) + 1;
-    // answers.push({
-    //     answer:answer
-    // });
-    // //保存文件/写文件   异步的方法writeFile
-    // fs.writeFile(datapath,JSON.stringify(answers),function(err){
-        res.json(answers);
-    // });
-})
+// app.get('/api/answer',function(req,res){
+//     // app.post('/users',function(req,res){
+//     //接收请求体保存到文件
+//     // var user = req.body;
+//     var answer = req.query.message;
+//     var answers = require(datapath);
+//     // user.id = Number(users[users.length-1].id) + 1;
+//     answers.push({
+//         answer:answer
+//     });
+//     //保存文件/写文件   异步的方法writeFile
+//     fs.writeFile(datapath,JSON.stringify(answers),function(err){
+//         res.send('写入完成');
+//     });
+// })
+// app.get('/api/show',function(req,res){
+//     // app.post('/users',function(req,res){
+//     //接收请求体保存到文件
+//     // var user = req.body;
+//     // var answer = req.query.message;
+//     var answers = require(datapath);
+//     answers.reverse();
+//     // user.id = Number(users[users.length-1].id) + 1;
+//     // answers.push({
+//     //     answer:answer
+//     // });
+//     // //保存文件/写文件   异步的方法writeFile
+//     // fs.writeFile(datapath,JSON.stringify(answers),function(err){
+//         res.json(answers);
+//     // });
+// })
 //微博自动回复
 app.post('/weibo',function(req,res){
     var obj = {
@@ -69,7 +74,7 @@ app.post('/weibo',function(req,res){
         "receiver_id":req.body.sender_id,
         "type":"text",
         "data":encodeURI(JSON.stringify({
-            "text":req.body.text
+            "text":getRandomContent()
         }))
     };
 
@@ -89,7 +94,8 @@ app.post('/wechat',function(req,res){
         var FromUserName = getXMLNodeValue('FromUserName',_da);
         var CreateTime = getXMLNodeValue('CreateTime',_da);
         var MsgType = getXMLNodeValue('MsgType',_da);
-        var Content = getXMLNodeValue('Content',_da);
+        // var Content = getXMLNodeValue('Content',_da);
+        var Content = getRandomContent();
         var MsgId = getXMLNodeValue('MsgId',_da); 
         var xml = '<xml><ToUserName>'+FromUserName+'</ToUserName><FromUserName>'+ToUserName+'</FromUserName><CreateTime>'+CreateTime+'</CreateTime><MsgType>'+MsgType+'</MsgType><Content>'+Content+'</Content></xml>';
         res.send(xml);
@@ -107,3 +113,18 @@ app.listen(process.env.PORT || 5050)
 app.on("error",function(e){
 	console.log(e);
 })
+function getRandomContent(){
+    var a = require(datapath);
+    var b = [];
+    while (a.length > 0) {
+        var index = parseInt(Math.random() * (a.length - 1));
+        b.push(a[index]);
+        a.splice(index, 1);
+    }
+    a = b;
+    var len = a.length;
+    // console.log(answers.length);
+
+    var content = a[parseInt(Math.random()*len)];
+    return content;
+}
