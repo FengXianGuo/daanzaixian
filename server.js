@@ -130,5 +130,6 @@ function getRandomContent(){
     // console.log(answers.length);
 
     var content = a[parseInt(Math.random()*len)];
+    console.log(content);
     return content.answer;
 }
