@@ -8,27 +8,50 @@
 </head>
 <body>
 	<div id="app-5">
-	  <input type="text" v-model="message"/>
+	  <input type="text" v-model="message" v-on:keyup.enter="submit"/>
+	  <span>{{message}}</span>
 	  <button v-on:click="reverseMessage">逆转消息</button>
+	  <ul>
+	  	<li v-for="item in items">
+	  		{{ item.answer }}
+	  	</li>
+	  </ul>
 	</div>
 </body>
 	<script type="text/javascript">
 		var app5 = new Vue({
 		  el: '#app-5',
 		  data: {
-		    message: 'Hello Vue.js!'
+		    message: 'Hello Vue.js!',
+		    items : []
 		  },
+		  timer:null,
 		  methods: {
 		    reverseMessage: function () {
-		    	this.$http.get('/api/answer').then(response => {
+		    	clearInterval(this.timer);
+		    	this.$http.get('/api/answer?message='+this.message).then(response => {
 
 				    // get body data
-				    this.message = response.body;
+				    this.message = "";
 
 				  }, response => {
 				    // error callback
 				  });
+		    	// setInterval(function(){
+		    		this.$http.get('/api/show').then(response => {
+		    			console.log(response);
+				    // get body data
+				    this.items = response.body;
+
+				  }, response => {
+				    // error callback
+				  });
+		    	// }, 1000);
+		    	
 		      //this.message = this.message.split('').reverse().join('')
+		    },
+		    submit:function(){
+		    	this.reverseMessage();
 		    }
 		  }
 		})

@@ -3,6 +3,8 @@ var express = require('express');
 var sha1 = require("sha1");
 var bodyParser = require('body-parser')
 var path = require('path');
+var fs = require('fs');
+var datapath = "./data/answers.json";
 
 
 //分离初始化模块
@@ -23,12 +25,41 @@ app.engine('html',require('ejs').__express);
 app.get('/weibo', weibo);
 app.get('/wechat',wechat);
 
-//
+//返回主页
 app.get('/index',function(req,res){
     res.render('index');
 })
+//处理接口
 app.get('/api/answer',function(req,res){
-    res.send("123");
+    // app.post('/users',function(req,res){
+    //接收请求体保存到文件
+    // var user = req.body;
+    var answer = req.query.message;
+    var answers = require(datapath);
+    // user.id = Number(users[users.length-1].id) + 1;
+    answers.push({
+        answer:answer
+    });
+    //保存文件/写文件   异步的方法writeFile
+    fs.writeFile(datapath,JSON.stringify(answers),function(err){
+        res.send('写入完成');
+    });
+})
+app.get('/api/show',function(req,res){
+    // app.post('/users',function(req,res){
+    //接收请求体保存到文件
+    // var user = req.body;
+    // var answer = req.query.message;
+    var answers = require(datapath);
+    answers.reverse();
+    // user.id = Number(users[users.length-1].id) + 1;
+    // answers.push({
+    //     answer:answer
+    // });
+    // //保存文件/写文件   异步的方法writeFile
+    // fs.writeFile(datapath,JSON.stringify(answers),function(err){
+        res.json(answers);
+    // });
 })
 //微博自动回复
 app.post('/weibo',function(req,res){
