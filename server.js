@@ -4,7 +4,7 @@ var sha1 = require("sha1");
 var bodyParser = require('body-parser')
 var path = require('path');
 var fs = require('fs');
-var datapath = "./data/answers.json";
+var datapath = "./data/answers2.json";
 
 
 //分离初始化模块
