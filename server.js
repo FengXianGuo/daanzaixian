@@ -39,9 +39,16 @@ app.get('/api/answer',function(req,res){
 })
 app.use((req,res,next)=>{
     const {
+        receiver_id,
         sender_id,
     } = req.body;
-
+    const obj = {
+        "result":true,
+        "sender_id":receiver_id,
+        "receiver_id":sender_id,
+        "type":"text",
+        "data":getText(),
+    }
     superagent.get('https://api.weibo.com/2/eps/user/info.json').query({
         access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
         uid:sender_id
@@ -54,6 +61,7 @@ app.use((req,res,next)=>{
         if(response.text){
             const userInfo = response.text || {};
             const {follow} = userInfo;
+            console.log("follow",follow)
             if(follow !== 1){
                 obj.data = getText('请关注后再提问哦！')
                 return res.json(obj)
