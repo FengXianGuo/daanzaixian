@@ -15,6 +15,12 @@ const getRandomContent = (()=>{
     }
 })()
 
+const getText = (content)=>{
+    return encodeURI(JSON.stringify({
+        "text":content || getRandomContent()
+    }))
+}
+
 //分离初始化模块
 var weibo = require('./init').weibo;
 var wechat = require('./init').wechat;
@@ -77,17 +83,24 @@ app.get('/api/answer',function(req,res){
 // })
 //微博自动回复
 app.post('/weibo',function(req,res){
-    console.log("body",req.body);
-    var obj = {
+    const {
+        receiver_id,
+        sender_id,
+        data = {}
+    } = req.body;
+    const {subtype} = data;
+    const obj = {
         "result":true,
-        "sender_id":req.body.receiver_id,
-        "receiver_id":req.body.sender_id,
+        "sender_id":receiver_id,
+        "receiver_id":sender_id,
         "type":"text",
-        "data":encodeURI(JSON.stringify({
-            "text":getRandomContent()
-        }))
-    };
-    // console.log(obj);
+        "text":getText(),
+    }
+    
+    if(subtype === 'unfollow'){// '取消关注事件消息'
+        obj.text = getText('很遗憾不能再帮问一次！')
+        res.json(obj);
+    }
 
     res.json(obj);
 })
