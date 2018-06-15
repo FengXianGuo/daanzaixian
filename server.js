@@ -110,7 +110,7 @@ app.post('/weibo',function(req,res){
             return res.json(obj)
         }
         console.log(response)
-        console.log('response',response.body);
+        console.log('response',response.text);
     });
     // console.log('body',req.body);
     if(subtype === 'subscribe'){// '关注事件消息'
