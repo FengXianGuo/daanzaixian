@@ -40,6 +40,7 @@ app.get('/index',function(req,res){
 //处理接口
 
 app.get('/api/answer',function(req,res){
+    console.log('访问api/answer');
     var content = getRandomContent();
     res.send(content);
 })
@@ -76,7 +77,7 @@ app.get('/api/answer',function(req,res){
 // })
 //微博自动回复
 app.post('/weibo',function(req,res){
-
+    console.log("body",req.body);
     var obj = {
         "result":true,
         "sender_id":req.body.receiver_id,
