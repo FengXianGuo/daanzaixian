@@ -5,21 +5,7 @@ const bodyParser = require('body-parser')
 const path = require('path');
 const fs = require('fs');
 
-const getRandomContent = (()=>{
-    const datapath = "./data/answers2.json";
-    const db = require(datapath);
-    const length = db.length;
-    return ()=>{
-        const content = db[parseInt(Math.random()*(length-1))];
-        return content.answer;
-    }
-})()
 
-const getText = (content)=>{
-    return encodeURI(JSON.stringify({
-        "text":content || getRandomContent()
-    }))
-}
 
 //分离初始化模块
 var weibo = require('./init').weibo;
@@ -81,6 +67,22 @@ app.get('/api/answer',function(req,res){
 //         res.json(answers);
 //     // });
 // })
+
+const getRandomContent = (()=>{
+    const datapath = "./data/answers2.json";
+    const db = require(datapath);
+    const length = db.length;
+    return ()=>{
+        const content = db[parseInt(Math.random()*(length-1))];
+        return content.answer;
+    }
+})()
+
+const getText = (content)=>{
+    return encodeURI(JSON.stringify({
+        "text":content || getRandomContent()
+    }))
+}
 //微博自动回复
 app.post('/weibo',function(req,res){
     const {
@@ -99,10 +101,10 @@ app.post('/weibo',function(req,res){
     console.log('body',req.body);
     
     
-    if(subtype === 'unfollow'){// '取消关注事件消息'
-        obj.text = getText('很遗憾不能再帮问一次！')
-        return res.json(obj);
-    }
+    // if(subtype === 'unfollow'){// '取消关注事件消息'
+    //     obj.text = getText('很遗憾不能再帮问一次！')
+    //     return res.json(obj);
+    // }
     console.log('obj',obj);
     return res.json(obj);
 })
