@@ -99,8 +99,14 @@ app.post('/weibo',function(req,res){
         "data":getText(),
     }
     console.log('body',req.body);
-    
-    
+    if(subtype === 'subscribe'){// '关注事件消息'
+        obj.data = getText('感谢您的关注，请您畅所欲言')
+        return res.json(obj);
+    }
+    if(subtype === 'follow'){// '订阅事件消息'
+        // obj.data = getText('感谢您的关注，请您畅所欲言')
+        return false;
+    }
     if(subtype === 'unfollow'||subtype === 'unsubscribe'){// '取消关注事件消息'
         obj.data = getText('很遗憾不能再帮问一次！')
         return res.json(obj);
