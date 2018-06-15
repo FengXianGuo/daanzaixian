@@ -38,6 +38,7 @@ app.get('/api/answer',function(req,res){
     res.send(content);
 })
 app.use((req,res,next)=>{
+    console.log("中间件:",req.body);
     const {
         receiver_id,
         sender_id,
