@@ -103,15 +103,16 @@ app.post('/weibo',function(req,res){
     superagent.get('https://api.weibo.com/2/eps/user/info.json').query({
         access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
         uid:sender_id
-    }).type('json').end((err, response) => {
+    }).set('Accept', 'application/json').end((err, response) => {
         console.log("err",err);
         if(err){
             obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
             return res.json(obj)
         }
+        console.log(response)
         console.log('response',response.body);
     });
-    console.log('body',req.body);
+    // console.log('body',req.body);
     if(subtype === 'subscribe'){// '关注事件消息'
         obj.data = getText('感谢您的关注，请您畅所欲言')
         return res.json(obj);
@@ -124,7 +125,7 @@ app.post('/weibo',function(req,res){
         obj.data = getText('很遗憾不能再帮问一次！')
         return res.json(obj);
     }
-    console.log('obj',obj);
+    // console.log('obj',obj);
     return res.json(obj);
 })
 //微信自动回复
