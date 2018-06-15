@@ -1,11 +1,19 @@
 //创建express应用
-var express = require('express');
-var sha1 = require("sha1");
-var bodyParser = require('body-parser')
-var path = require('path');
-var fs = require('fs');
-var datapath = "./data/answers2.json";
+const express = require('express');
+const sha1 = require("sha1");
+const bodyParser = require('body-parser')
+const path = require('path');
+const fs = require('fs');
 
+const getRandomContent = (()=>{
+    const datapath = "./data/answers2.json";
+    const db = require(datapath);
+    const length = db.length;
+    return ()=>{
+        const content = db[parseInt(Math.random()*(length-1))];
+        return content.answer;
+    }
+})()
 
 //分离初始化模块
 var weibo = require('./init').weibo;
@@ -113,23 +121,10 @@ app.post('/wechat',function(req,res){
 })
 
 
-app.listen(process.env.PORT || 5050)
+app.listen(process.env.PORT || 3389,()=>{
+    console.log("server start at 3389")
+})
 app.on("error",function(e){
 	console.log(e);
 })
-function getRandomContent(){
-    var a = require(datapath);
-    // var b = [];
-    // while (a.length > 0) {
-    //     var index = parseInt(Math.random() * (a.length - 1));
-    //     b.push(a[index]);
-    //     a.splice(index, 1);
-    // }
-    // a = b;
-    var len = a.length;
-    // console.log(answers.length);
 
-    var content = a[parseInt(Math.random()*len)];
-    console.log(content);
-    return content.answer;
-}
