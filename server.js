@@ -37,6 +37,10 @@ app.get('/api/answer',function(req,res){
     var content = getRandomContent();
     res.send(content);
 })
+app.use((req,res,next)=>{
+    console.log(req.body);
+    next();
+})
 // app.get('/api/answer',function(req,res){
 //     // app.post('/users',function(req,res){
 //     //接收请求体保存到文件
@@ -84,6 +88,7 @@ const getText = (content)=>{
         "text":content || getRandomContent()
     }))
 }
+
 //微博自动回复
 app.post('/weibo',function(req,res){
     const {
@@ -104,13 +109,19 @@ app.post('/weibo',function(req,res){
         access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
         uid:sender_id
     }).set('Accept', 'application/json').end((err, response) => {
-        console.log("err",err);
         if(err){
             obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
             return res.json(obj)
         }
-        console.log(response)
-        console.log('response',response.text);
+        console.log('response.text',response.text);
+        if(response.text){
+            const userInfo = response.text || {};
+            const {follow} = userInfo;
+            if(follow !== 1){
+                obj.data = getText('请关注后再提问哦！')
+                return res.json(obj)
+            }
+        }
     });
     // console.log('body',req.body);
     if(subtype === 'subscribe'){// '关注事件消息'
