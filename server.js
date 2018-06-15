@@ -96,15 +96,15 @@ app.post('/weibo',function(req,res){
         "sender_id":receiver_id,
         "receiver_id":sender_id,
         "type":"text",
-        "text":getText(),
+        "data":getText(),
     }
     console.log('body',req.body);
     
     
-    // if(subtype === 'unfollow'){// '取消关注事件消息'
-    //     obj.text = getText('很遗憾不能再帮问一次！')
-    //     return res.json(obj);
-    // }
+    if(subtype === 'unfollow'){// '取消关注事件消息'
+        obj.data = getText('很遗憾不能再帮问一次！')
+        return res.json(obj);
+    }
     console.log('obj',obj);
     return res.json(obj);
 })
