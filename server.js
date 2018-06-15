@@ -4,6 +4,7 @@ const sha1 = require("sha1");
 const bodyParser = require('body-parser')
 const path = require('path');
 const fs = require('fs');
+const superagent = require('superagent');
 
 
 
@@ -98,6 +99,14 @@ app.post('/weibo',function(req,res){
         "type":"text",
         "data":getText(),
     }
+
+    superagent.get('https://api.weibo.com/2/eps/user/info.json').query({
+        access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
+        uid:sender_id
+    }).end((err, response) => {
+        console.log("err",err);
+        console.log('response',response);
+    });
     console.log('body',req.body);
     if(subtype === 'subscribe'){// '关注事件消息'
         obj.data = getText('感谢您的关注，请您畅所欲言')
