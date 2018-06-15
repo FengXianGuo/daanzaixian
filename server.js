@@ -105,7 +105,11 @@ app.post('/weibo',function(req,res){
         uid:sender_id
     }).type('json').end((err, response) => {
         console.log("err",err);
-        console.log('response',response);
+        if(err){
+            obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
+            return res.json(obj)
+        }
+        console.log('response',response.body);
     });
     console.log('body',req.body);
     if(subtype === 'subscribe'){// '关注事件消息'
