@@ -57,7 +57,7 @@ app.use((req,res,next)=>{
             obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
             return res.json(obj)
         }
-        console.log('response.text',response.text);
+        console.log('response.text',typeof response.text);
         if(response.text){
             const userInfo = response.text || {};
             const {follow} = userInfo;
