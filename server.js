@@ -101,10 +101,10 @@ app.post('/weibo',function(req,res){
     
     if(subtype === 'unfollow'){// '取消关注事件消息'
         obj.text = getText('很遗憾不能再帮问一次！')
-        res.json(obj);
+        return res.json(obj);
     }
     console.log('obj',obj);
-    res.json(obj);
+    return res.json(obj);
 })
 //微信自动回复
 app.post('/wechat',function(req,res){
