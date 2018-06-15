@@ -41,6 +41,7 @@ app.use((req,res,next)=>{
     const {
         receiver_id,
         sender_id,
+        data = {},
     } = req.body;
     const {subtype} = data;
     const obj = {
