@@ -103,7 +103,7 @@ app.post('/weibo',function(req,res){
     superagent.get('https://api.weibo.com/2/eps/user/info.json').query({
         access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
         uid:sender_id
-    }).end((err, response) => {
+    }).type('json').end((err, response) => {
         console.log("err",err);
         console.log('response',response);
     });
