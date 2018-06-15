@@ -101,7 +101,7 @@ app.post('/weibo',function(req,res){
     console.log('body',req.body);
     
     
-    if(subtype === 'unfollow'){// '取消关注事件消息'
+    if(subtype === 'unfollow'||subtype === 'unsubscribe'){// '取消关注事件消息'
         obj.data = getText('很遗憾不能再帮问一次！')
         return res.json(obj);
     }
