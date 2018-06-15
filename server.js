@@ -42,6 +42,7 @@ app.use((req,res,next)=>{
         receiver_id,
         sender_id,
     } = req.body;
+    const {subtype} = data;
     const obj = {
         "result":true,
         "sender_id":receiver_id,
@@ -49,6 +50,20 @@ app.use((req,res,next)=>{
         "type":"text",
         "data":getText(),
     }
+        // console.log('body',req.body);
+    if(subtype === 'subscribe'){// '关注事件消息'
+        obj.data = getText('感谢您的关注，请您畅所欲言')
+        return res.json(obj);
+    }
+    if(subtype === 'follow'){// '订阅事件消息'
+        // obj.data = getText('感谢您的关注，请您畅所欲言')
+        return false;
+    }
+    if(subtype === 'unfollow'||subtype === 'unsubscribe'){// '取消关注事件消息'
+        obj.data = getText('很遗憾不能再帮问一次！')
+        return res.json(obj);
+    }
+
     superagent.get('https://api.weibo.com/2/eps/user/info.json').query({
         access_token:'2.00jCLboGd55hBD5d2cd028d7ySSLOB',
         uid:sender_id
@@ -57,7 +72,6 @@ app.use((req,res,next)=>{
             obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
             return res.json(obj)
         }
-        console.log('response.text',response.text);
         if(response.text){
             let userInfo = {};
             try {
@@ -68,7 +82,6 @@ app.use((req,res,next)=>{
             }
             
             const {follow} = userInfo;
-            console.log("follow",follow)
             if(follow !== 1){
                 obj.data = getText('请关注后再提问哦！')
                 return res.json(obj)
@@ -140,19 +153,7 @@ app.post('/weibo',function(req,res){
         "type":"text",
         "data":getText(),
     }
-    // console.log('body',req.body);
-    if(subtype === 'subscribe'){// '关注事件消息'
-        obj.data = getText('感谢您的关注，请您畅所欲言')
-        return res.json(obj);
-    }
-    if(subtype === 'follow'){// '订阅事件消息'
-        // obj.data = getText('感谢您的关注，请您畅所欲言')
-        return false;
-    }
-    if(subtype === 'unfollow'||subtype === 'unsubscribe'){// '取消关注事件消息'
-        obj.data = getText('很遗憾不能再帮问一次！')
-        return res.json(obj);
-    }
+
     // console.log('obj',obj);
     return res.json(obj);
 })
