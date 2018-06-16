@@ -33,7 +33,6 @@ app.get('/index',function(req,res){
 //处理接口
 
 app.get('/api/answer',function(req,res){
-    console.log('访问api/answer');
     var content = getRandomContent();
     res.send(content);
 })
@@ -53,7 +52,6 @@ app.get('/api/answer',function(req,res){
 //     // next();
 // })
 app.use((req,res,next)=>{
-    console.log("中间件:",req.body);
 //     { type: 'event',
 //   receiver_id: 6244474381,
 //   sender_id: 5896819488,
@@ -195,7 +193,6 @@ const getText = (content)=>{
 
 //微博自动回复
 app.post('/weibo',function(req,res){
-    console.log("/weibo")
     const {
         receiver_id,
         sender_id,
