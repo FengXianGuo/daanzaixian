@@ -37,6 +37,21 @@ app.get('/api/answer',function(req,res){
     var content = getRandomContent();
     res.send(content);
 })
+
+// superagent.get('https://www.sheup.com/meiri_yuncheng.php?action=SuanGua').set({
+//     'Cache-Control':'no-cache',
+//     'Content-Type':'application/x-www-form-urlencoded',
+//     'secureProtocol': 'TLSv1_method',
+//     ciphers: 'DES-CBC3-SHA'
+// }).end((err, response)=>{
+//     console.log(err);
+//     // if(err){
+//     //     obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
+//     //     return res.json(obj)
+//     // }
+//     console.log(response.body)
+//     // next();
+// })
 app.use((req,res,next)=>{
     console.log("中间件:",req.body);
 //     { type: 'event',
@@ -113,16 +128,19 @@ app.use((req,res,next)=>{
         "data":getText(),
     }
     if(subtype === 'click'){
-        if(key === 'get_today_status'){
-            superagent.get('https://www.sheup.com/meiri_yuncheng.php?action=SuanGua').end((err, response)=>{
-                if(err){
-                    obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
-                    return res.json(obj)
-                }
-                console.log(response.body)
-                next();
-            })
-        }
+        obj.data = getText('此功能敬请期待！')
+        return res.json(obj)
+        // if(key === 'get_today_status'){
+        //     superagent.get('https://www.sheup.com/meiri_yuncheng.php?action=SuanGua').end((err, response)=>{
+        //         console.log(err);
+        //         if(err){
+        //             obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
+        //             return res.json(obj)
+        //         }
+        //         console.log(response.body)
+        //         next();
+        //     })
+        // }
     }else{
         next();
     }   
