@@ -99,11 +99,29 @@ app.use((req,res,next)=>{
     });
 })
 app.use((req,res,next)=>{
-    const { data = {}} = req.body;
+    const {
+        receiver_id,
+        sender_id,
+        data = {},
+    } = req.body;
+    const {subtype} = data;
+    const obj = {
+        "result":true,
+        "sender_id":receiver_id,
+        "receiver_id":sender_id,
+        "type":"text",
+        "data":getText(),
+    }
     const {subtype,key} = data;
     if(subtype === 'click'){
         if(key === 'get_today_status'){
-            console.log('123')
+            superagent.get('https://www.sheup.com/meiri_yuncheng.php?action=SuanGua').end((err, response)=>{
+                if(err){
+                    obj.data = getText('当前系统不可用，请稍后重试！或疯狂发私信给博主，也可以！')
+                    return res.json(obj)
+                }
+                console.log(response.body)
+            })
         }
     }
     next();
