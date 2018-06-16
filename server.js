@@ -104,7 +104,7 @@ app.use((req,res,next)=>{
         sender_id,
         data = {},
     } = req.body;
-    const {subtype} = data;
+    const {subtype,key} = data;
     const obj = {
         "result":true,
         "sender_id":receiver_id,
@@ -112,7 +112,6 @@ app.use((req,res,next)=>{
         "type":"text",
         "data":getText(),
     }
-    const {subtype,key} = data;
     if(subtype === 'click'){
         if(key === 'get_today_status'){
             superagent.get('https://www.sheup.com/meiri_yuncheng.php?action=SuanGua').end((err, response)=>{
