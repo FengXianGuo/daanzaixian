@@ -152,7 +152,7 @@ const getText = (content)=>{
 
 //微博自动回复
 app.post('/weibo',function(req,res){
-    console("/weibo")
+    console.log("/weibo")
     const {
         receiver_id,
         sender_id,
