@@ -99,7 +99,13 @@ app.use((req,res,next)=>{
     });
 })
 app.use((req,res,next)=>{
-    console.log("mid2",req.body);
+    const { data = {}} = req.body;
+    const {subtype,key} = data;
+    if(subtype === 'click'){
+        if(key === 'get_today_status'){
+            console.log('123')
+        }
+    }
     next();
 })
 // app.get('/api/answer',function(req,res){
