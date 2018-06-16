@@ -120,10 +120,12 @@ app.use((req,res,next)=>{
                     return res.json(obj)
                 }
                 console.log(response.body)
+                next();
             })
         }
-    }
-    next();
+    }else{
+        next();
+    }   
 })
 // app.get('/api/answer',function(req,res){
 //     // app.post('/users',function(req,res){
