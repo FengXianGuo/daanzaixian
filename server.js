@@ -39,6 +39,12 @@ app.get('/api/answer',function(req,res){
 })
 app.use((req,res,next)=>{
     console.log("中间件:",req.body);
+//     { type: 'event',
+//   receiver_id: 6244474381,
+//   sender_id: 5896819488,
+//   created_at: 'Sat Jun 16 13:32:28 +0800 2018',
+//   text: '事件消息',
+//   data: { subtype: 'click', key: 'get_today_status' }
     const {
         receiver_id,
         sender_id,
@@ -92,6 +98,10 @@ app.use((req,res,next)=>{
         next();
     });
 })
+app.use((req,res,next)=>{
+    console.log("mid2",req.body);
+    next();
+})
 // app.get('/api/answer',function(req,res){
 //     // app.post('/users',function(req,res){
 //     //接收请求体保存到文件
@@ -142,6 +152,7 @@ const getText = (content)=>{
 
 //微博自动回复
 app.post('/weibo',function(req,res){
+    console("/weibo")
     const {
         receiver_id,
         sender_id,
